@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Result</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Resume Analysis Result</h2>
+        
+        <div class="card p-4 shadow">
+            <h4 class="text-center mb-3">Job Role: <b>{{ job_role }}</b></h4>
+
+            <!-- Resume Score -->
+            <div class="mb-3">
+                <h5>Resume Match Score: <b>{{ score }}%</b></h5>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" 
+                        style="width: {{ score }}%;" 
+                        aria-valuenow="{{ score }}" aria-valuemin="0" aria-valuemax="100">
+                        {{ score }}%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Found Skills -->
+            <div class="mb-3">
+                <h5>Matched Skills:</h5>
+                <ul class="list-group">
+                    {% for skill in found_skills %}
+                        <li class="list-group-item list-group-item-success">{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Missing Skills -->
+            <div class="mb-3">
+                <h5>Missing Skills:</h5>
+                <ul class="list-group">
+                    {% for skill in missing_skills %}
+                        <li class="list-group-item list-group-item-danger">{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Resume Download Button -->
+            <div class="text-center mt-3">
+                <a href="{{ url_for('download_file', filename=filename) }}" class="btn btn-primary">
+                    Download Your Resume
+                </a>
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center mt-3">
+                <a href="/" class="btn btn-secondary">Upload Another Resume</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
